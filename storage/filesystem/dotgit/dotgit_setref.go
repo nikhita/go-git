@@ -74,7 +74,7 @@ func (d *DotGit) setRefNorwfs(fileName, content string, old *plumbing.Reference)
 		}
 
 		if ref.Hash() != old.Hash() {
-			return fmt.Errorf("reference has changed concurrently")
+			return fmt.Errorf("reference has changed concurrently for %s from %s to %s", old.Name().String(), old.Hash().String(), ref.Hash().String())
 		}
 	}
 

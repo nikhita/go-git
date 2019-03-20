@@ -596,7 +596,7 @@ func (d *DotGit) checkReferenceAndTruncate(f billy.File, old *plumbing.Reference
 		return err
 	}
 	if ref.Hash() != old.Hash() {
-		return fmt.Errorf("reference has changed concurrently")
+		return fmt.Errorf("reference has changed concurrently for %s from %s to %s", old.Name().String(), old.Hash().String(), ref.Hash().String())
 	}
 	_, err = f.Seek(0, io.SeekStart)
 	if err != nil {
