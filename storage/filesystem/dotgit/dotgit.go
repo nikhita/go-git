@@ -9,6 +9,7 @@ import (
 	stdioutil "io/ioutil"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 	"time"
 
@@ -596,6 +597,7 @@ func (d *DotGit) checkReferenceAndTruncate(f billy.File, old *plumbing.Reference
 		return err
 	}
 	if ref.Hash() != old.Hash() {
+		debug.PrintStack()
 		return fmt.Errorf("reference has changed concurrently for %s from %s to %s", old.Name().String(), old.Hash().String(), ref.Hash().String())
 	}
 	_, err = f.Seek(0, io.SeekStart)
